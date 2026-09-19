@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Free School Slides</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F6F5EF;
+    --paper-line: #DCD9CB;
+    --board: #16302A;
+    --board-2: #1F3D33;
+    --ink: #1B2A28;
+    --ink-soft: #4B5B57;
+    --yellow: #F0BD4A;
+    --coral: #E96C50;
+    --white: #FFFFFF;
+    --focus: #2E6F5E;
+
+    color-scheme: light;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #17211E;
+      --paper-line: #2A3733;
+      --board: #0E1C17;
+      --board-2: #16302A;
+      --ink: #ECEAE1;
+      --ink-soft: #AEB9B4;
+      --white: #26332E;
+      --focus: #7FC9AE;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #17211E;
+    --paper-line: #2A3733;
+    --board: #0E1C17;
+    --board-2: #16302A;
+    --ink: #ECEAE1;
+    --ink-soft: #AEB9B4;
+    --white: #26332E;
+    --focus: #7FC9AE;
+    color-scheme: dark;
+  }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  * { box-sizing: border-box; }
+  html, body { height: auto; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Work Sans", system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  img { max-width: 100%; }
+
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* ---------- Header ---------- */
+  header.top {
+    padding: 1.4rem 0;
+  }
+  .header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .badge {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--ink-soft);
+    background: var(--white);
+    border: 1px solid var(--paper-line);
+    border-radius: 999px;
+    padding: 0.35rem 0.85rem;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: "Caveat", cursive;
+    font-weight: 700;
+    font-size: 1.7rem;
+    color: var(--ink);
+    text-decoration: none;
+    width: fit-content;
+  }
+  .brand svg { flex: none; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    background: var(--board);
+    color: var(--white);
+    border-radius: 0 0 2.5rem 2.5rem;
+    padding: 3.2rem 0 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero .wrap { position: relative; z-index: 1; }
+  .hero-doodles { position: absolute; inset: 0; pointer-events: none; opacity: 0.9; }
+  .hero h1 {
+    font-family: "Caveat", cursive;
+    font-weight: 700;
+    font-size: clamp(2.6rem, 6vw, 4.4rem);
+    line-height: 1.05;
+    margin: 0 0 1rem;
+    max-width: 14ch;
+  }
+  .hero h1 .underline {
+    position: relative;
+    white-space: nowrap;
+  }
+  .hero h1 .underline svg {
+    position: absolute;
+    left: -2%;
+    bottom: -0.28em;
+    width: 104%;
+    height: 0.35em;
+  }
+  .hero p {
+    font-size: 1.15rem;
+    line-height: 1.55;
+    max-width: 46ch;
+    color: #D9E4DD;
+    margin: 0 0 2rem;
+  }
+  .hero-actions { display: flex; gap: 0.9rem; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.85rem 1.5rem;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.15s ease;
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn-primary { background: var(--yellow); color: #2B2109; }
+  .btn-primary:hover { background: #F3C765; }
+  .btn-ghost {
+    background: transparent;
+    color: var(--white);
+    border: 1.5px solid rgba(255,255,255,0.4);
+  }
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.8); }
+  .btn:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  /* ---------- Steps ---------- */
+  .steps {
+    padding: 3.4rem 0 2.6rem;
+  }
+  .steps h2, .form-section h2 {
+    font-family: "Caveat", cursive;
+    font-size: 2.1rem;
+    font-weight: 700;
+    margin: 0 0 1.8rem;
+  }
+  .step-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.6rem;
+  }
+  .step {
+    background: var(--white);
+    border: 1px solid var(--paper-line);
+    border-radius: 1rem;
+    padding: 1.4rem 1.3rem 1.6rem;
+  }
+  .step .num {
+    font-family: "Caveat", cursive;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--coral);
+    line-height: 1;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  .step h3 {
+    margin: 0 0 0.4rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+  }
+  .step p {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- Form ---------- */
+  .form-section { padding: 1rem 0 4.5rem; }
+  .form-card {
+    background: var(--white);
+    border: 1px solid var(--paper-line);
+    border-radius: 1.4rem;
+    padding: 2rem;
+  }
+  .field { margin-bottom: 1.3rem; }
+  .field label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.92rem;
+    margin-bottom: 0.4rem;
+  }
+  .field .hint {
+    font-weight: 400;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+  }
+  .field input, .field textarea {
+    width: 100%;
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 0.75rem 0.9rem;
+    border-radius: 0.6rem;
+    border: 1.5px solid var(--paper-line);
+    background: var(--paper);
+    color: var(--ink);
+  }
+  .field textarea { resize: vertical; min-height: 6.5rem; line-height: 1.5; }
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.1rem;
+  }
+  .form-actions {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    margin-top: 1.6rem;
+  }
+  .btn-dark { background: var(--board); color: var(--white); }
+  .btn-dark:hover { background: var(--board-2); }
+  .btn-outline {
+    background: transparent;
+    border: 1.5px solid var(--paper-line);
+    color: var(--ink);
+  }
+  .status {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    min-height: 1.2em;
+  }
+  .status.show-copied { color: var(--focus); font-weight: 600; }
+
+  .fallback {
+    margin-top: 1.4rem;
+    padding-top: 1.3rem;
+    border-top: 1px dashed var(--paper-line);
+  }
+  .fallback summary {
+    cursor: pointer;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--ink-soft);
+  }
+  .fallback textarea {
+    margin-top: 0.8rem;
+    width: 100%;
+    min-height: 8rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.82rem;
+    padding: 0.8rem;
+    border-radius: 0.6rem;
+    border: 1.5px solid var(--paper-line);
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  footer {
+    padding: 2rem 0 3rem;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+    text-align: center;
+  }
+
+  @media (max-width: 640px) {
+    .step-grid { grid-template-columns: 1fr; }
+    .two-col { grid-template-columns: 1fr; }
+    .hero { border-radius: 0 0 1.6rem 1.6rem; padding: 2.4rem 0 3rem; }
+    .form-card { padding: 1.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap header-row">
+    <a class="brand" href="#top">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="4" width="22" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
+        <path d="M7 9.5H14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <path d="M7 13.5H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      Free School Slides
+    </a>
+    <span class="badge">Free, no catch</span>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <svg class="hero-doodles" viewBox="0 0 880 500" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M760 60 L768 78 L787 82 L773 96 L777 115 L760 105 L743 115 L747 96 L733 82 L752 78 Z" fill="#F0BD4A" opacity="0.9"/>
+    <path d="M60 380 L66 393 L80 396 L69 406 L72 420 L60 412 L48 420 L51 406 L40 396 L54 393 Z" fill="#E96C50" opacity="0.85"/>
+    <path d="M800 300 q10 -14 20 0" stroke="#F0BD4A" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.7"/>
+    <path d="M40 120 q10 -14 20 0" stroke="#E96C50" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.6"/>
+  </svg>
+  <div class="wrap">
+    <h1>I'll build your class<br><span class="underline">presentation<svg viewBox="0 0 220 20" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 14 Q 30 4, 55 12 T 110 10 T 165 13 T 218 8" stroke="#E96C50" stroke-width="5" fill="none" stroke-linecap="round"/></svg></span> — free.</h1>
+    <p>Tell me your topic and I'll turn it into a full slide deck, then send the finished file straight to your inbox. No cost, no catch — just fill in the details below.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#request">Request a deck</a>
+      <a class="btn btn-ghost" href="#how">How it works</a>
+    </div>
+  </div>
+</section>
+
+<section class="steps" id="how">
+  <div class="wrap">
+    <h2>How it works</h2>
+    <div class="step-grid">
+      <div class="step">
+        <span class="num">1</span>
+        <h3>You describe the assignment</h3>
+        <p>Topic, subject, grade level, how many slides, and anything your teacher asked for. The more detail, the better the deck.</p>
+      </div>
+      <div class="step">
+        <span class="num">2</span>
+        <h3>I build your deck</h3>
+        <p>I put together a properly formatted, ready-to-present PowerPoint — not just a wall of bullet points.</p>
+      </div>
+      <div class="step">
+        <span class="num">3</span>
+        <h3>You get the file by email</h3>
+        <p>I send the finished .pptx to the email address you give me. Turnaround varies since this is a one-person, free operation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="form-section" id="request">
+  <div class="wrap">
+    <h2>Request your deck</h2>
+    <div class="form-card">
+      <div class="two-col">
+        <div class="field">
+          <label for="name">Your name</label>
+          <input type="text" id="name" autocomplete="name" />
+        </div>
+        <div class="field">
+          <label for="email">Your email <span class="hint">— I'll send the deck here</span></label>
+          <input type="email" id="email" autocomplete="email" />
+        </div>
+      </div>
+      <div class="two-col">
+        <div class="field">
+          <label for="subject">Subject / class</label>
+          <input type="text" id="subject" placeholder="e.g. U.S. History" />
+        </div>
+        <div class="field">
+          <label for="grade">Grade level</label>
+          <input type="text" id="grade" placeholder="e.g. 10th grade" />
+        </div>
+      </div>
+      <div class="field">
+        <label for="topic">Presentation topic</label>
+        <input type="text" id="topic" placeholder="e.g. The causes of the French Revolution" />
+      </div>
+      <div class="field">
+        <label for="details">Details <span class="hint">— slide count, due date, specific points to cover, sources to use, etc.</span></label>
+        <textarea id="details" placeholder="Anything that helps — rubric requirements, tone, length, images needed..."></textarea>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-dark" id="sendMail">Send request by email</button>
+        <button class="btn btn-outline" id="copyBtn">Copy request text</button>
+      </div>
+      <p class="status" id="status" aria-live="polite"></p>
+
+      <details class="fallback">
+        <summary>Email app not opening? Copy this and paste it into a message to demilcpkalms@gmail.com</summary>
+        <textarea id="rawText" readonly></textarea>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  This is a free, best-effort service run by one person — not a company. Turnaround and availability can vary.
+</footer>
+
+<script>
+  const TO_EMAIL = "demilcpkalms@gmail.com";
+
+  function buildMessage() {
+    const get = (id) => document.getElementById(id).value.trim();
+    const name = get("name");
+    const email = get("email");
+    const subject = get("subject");
+    const grade = get("grade");
+    const topic = get("topic");
+    const details = get("details");
+
+    const lines = [
+      "Presentation request",
+      "",
+      "Name: " + (name || "(not given)"),
+      "Reply-to email: " + (email || "(not given)"),
+      "Subject / class: " + (subject || "(not given)"),
+      "Grade level: " + (grade || "(not given)"),
+      "Topic: " + (topic || "(not given)"),
+      "",
+      "Details:",
+      details || "(none given)"
+    ];
+    return lines.join(String.fromCharCode(10));
+  }
+
+  function refreshRawText() {
+    document.getElementById("rawText").value = buildMessage();
+  }
+
+  ["name","email","subject","grade","topic","details"].forEach(id => {
+    document.getElementById(id).addEventListener("input", refreshRawText);
+  });
+  refreshRawText();
+
+  document.getElementById("sendMail").addEventListener("click", () => {
+    const topic = document.getElementById("topic").value.trim();
+    const mailSubject = "Presentation request" + (topic ? ": " + topic : "");
+    const body = buildMessage();
+    const mailtoUrl = "mailto:" + TO_EMAIL
+      + "?subject=" + encodeURIComponent(mailSubject)
+      + "&body=" + encodeURIComponent(body);
+    window.location.href = mailtoUrl;
+    document.getElementById("status").textContent = "Opening your email app\u2026 if nothing happens, use the copy option below.";
+  });
+
+  document.getElementById("copyBtn").addEventListener("click", async () => {
+    const text = buildMessage();
+    const statusEl = document.getElementById("status");
+    try {
+      await navigator.clipboard.writeText(text);
+      statusEl.textContent = "Copied! Paste it into an email to " + TO_EMAIL + ".";
+      statusEl.classList.add("show-copied");
+    } catch (err) {
+      refreshRawText();
+      statusEl.textContent = "Couldn't copy automatically — use the text box below instead.";
+      statusEl.classList.remove("show-copied");
+    }
+  });
+</script>
+
+</body>
+</html>
